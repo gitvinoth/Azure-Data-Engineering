@@ -1,0 +1,24 @@
+{
+	"name": "pl_execute_daily_9am",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Daily pipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_df_etl",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
