@@ -6,10 +6,17 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_sql_server",
+						"referenceName": "ds_synapse_tables",
 						"type": "DatasetReference"
 					},
 					"name": "dfsource"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_synapse_tables",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [
@@ -23,34 +30,50 @@
 						"referenceName": "test-project-sa-WorkspaceDefaultStorage",
 						"type": "LinkedServiceReference"
 					}
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_synapse_tables",
+						"type": "DatasetReference"
+					},
+					"name": "sink1",
+					"description": "Export data to ds_synapse_tables\ndim_customer_product"
+				},
+				{
+					"name": "sink2"
 				}
 			],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
 			"scriptLines": [
-				"source(output(",
-				"          ProductID as integer,",
-				"          Name as string,",
-				"          ProductNumber as string,",
-				"          Color as string,",
-				"          StandardCost as decimal(19,4),",
-				"          ListPrice as decimal(19,4),",
-				"          Size as string,",
-				"          Weight as decimal(8,2),",
-				"          ProductCategoryID as integer,",
-				"          ProductModelID as integer,",
-				"          SellStartDate as timestamp,",
-				"          SellEndDate as timestamp,",
-				"          DiscontinuedDate as timestamp,",
-				"          ThumbNailPhoto as binary,",
-				"          ThumbnailPhotoFileName as string,",
-				"          rowguid as string,",
-				"          ModifiedDate as timestamp",
-				"     ),",
-				"     allowSchemaDrift: false,",
+				"source(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     query: 'SELECT * FROm salesLT.product',",
-				"     format: 'query') ~> dfsource",
+				"     format: 'query',",
+				"     staged: true) ~> dfsource",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: true) ~> source1",
+				"dfsource join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"source1 filter(ERROR_FUNCTION('')) ~> filter1",
 				"dfsource sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -62,7 +85,23 @@
 				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> dfsink"
+				"     errorHandlingOption: 'stopOnFirstError') ~> dfsink",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2"
 			]
 		}
 	}
