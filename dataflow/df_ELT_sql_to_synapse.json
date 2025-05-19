@@ -46,7 +46,7 @@
 				"          rowguid as string,",
 				"          ModifiedDate as timestamp",
 				"     ),",
-				"     allowSchemaDrift: true,",
+				"     allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     query: 'SELECT * FROm salesLT.product',",
