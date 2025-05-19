@@ -1,0 +1,7 @@
+{
+	"name": "synapse-ws-custstgacct--myworkspacenameisthis-adlsaccountnamee",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/d52a53c7-8fab-4c45-9024-8bce42cd2ade/resourceGroups/Interview/providers/Microsoft.Storage/storageAccounts/adlsaccountnamee",
+		"groupId": "dfs"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"name": "synapse-ws-sql--myworkspacenameisthis",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/d52a53c7-8fab-4c45-9024-8bce42cd2ade/resourceGroups/Interview/providers/Microsoft.Synapse/workspaces/myworkspacenameisthis",
+		"groupId": "sql",
+		"fqdns": [
+			"myworkspacenameisthis.e0ed425f-3561-4c54-acf9-b7504f58a387.sql.azuresynapse.net"
+		]
+	}
+}
