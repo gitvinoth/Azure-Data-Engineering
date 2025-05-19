@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE PROC [dbo].[sp_tables]\n@schema VARCHAR(100)\nAS\nBEGIN\n\nEND\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
