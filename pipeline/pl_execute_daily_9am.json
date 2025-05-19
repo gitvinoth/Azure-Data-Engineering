@@ -12,13 +12,19 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "pl_df_etl",
+						"referenceName": "pl_copy_sql_to_synapse",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"table": "product"
+					}
 				}
 			}
 		],
+		"folder": {
+			"name": "Execute Pipelines"
+		},
 		"annotations": []
 	}
 }
