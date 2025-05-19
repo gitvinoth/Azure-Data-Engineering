@@ -27,10 +27,6 @@
 			],
 			"transformations": [],
 			"scriptLines": [
-				"parameters{",
-				"     schema as string (\"fact\"),",
-				"     table as string",
-				"}",
 				"source(output(",
 				"          ProductID as integer,",
 				"          Name as string,",

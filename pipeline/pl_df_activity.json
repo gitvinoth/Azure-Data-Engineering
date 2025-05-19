@@ -18,9 +18,35 @@
 					"dataflow": {
 						"referenceName": "df_ELT_sql_to_synapse",
 						"type": "DataFlowReference",
-						"parameters": {
-							"schema": "\"fact\""
+						"datasetParameters": {
+							"dfsource": {
+								"schema": {
+									"value": "@pipeline().parameters.source_schema",
+									"type": "Expression"
+								},
+								"table": {
+									"value": "@pipeline().parameters.table",
+									"type": "Expression"
+								}
+							},
+							"dfsink": {
+								"schema": {
+									"value": "@pipeline().parameters.sink_schema",
+									"type": "Expression"
+								},
+								"table": {
+									"value": "@pipeline().parameters.table",
+									"type": "Expression"
+								}
+							}
 						}
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "test-project-sa-WorkspaceDefaultStorage",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "synapsecontainers"
 					},
 					"compute": {
 						"coreCount": 8,
@@ -30,6 +56,19 @@
 				}
 			}
 		],
+		"parameters": {
+			"source_schema": {
+				"type": "string",
+				"defaultValue": "salesLT"
+			},
+			"sink_schema": {
+				"type": "string",
+				"defaultValue": "fact"
+			},
+			"table": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
