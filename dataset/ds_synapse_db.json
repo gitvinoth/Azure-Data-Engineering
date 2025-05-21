@@ -23,7 +23,7 @@
 			}
 		},
 		"sqlPool": {
-			"referenceName": "test_project",
+			"referenceName": "dedicatedsqlpool",
 			"type": "SqlPoolReference"
 		}
 	},
