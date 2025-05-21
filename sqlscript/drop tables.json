@@ -1,0 +1,17 @@
+{
+	"name": "drop tables",
+	"properties": {
+		"content": {
+			"query": "IF OBJECT_ID('SalesLT.Product') IS NOT NULL DROP TABLE SalesLT.Product;\nIF OBJECT_ID('SalesLT.ProductCategory') IS NOT NULL DROP TABLE SalesLT.ProductCategory;\nIF OBJECT_ID('SalesLT.SalesOrderHeader') IS NOT NULL DROP TABLE SalesLT.SalesOrderHeader;\nIF OBJECT_ID('SalesLT.SalesOrderDetail') IS NOT NULL DROP TABLE SalesLT.SalesOrderDetail;\nIF OBJECT_ID('SalesLT.Customer') IS NOT NULL DROP TABLE SalesLT.Customer;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dedicatedsqlpool",
+				"poolName": "dedicatedsqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
