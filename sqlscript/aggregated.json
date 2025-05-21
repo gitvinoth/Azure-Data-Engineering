@@ -1,0 +1,17 @@
+{
+	"name": "aggregated",
+	"properties": {
+		"content": {
+			"query": "INSERT INTO MonthlyCategorySales\nSELECT\n    pc.ProductCategoryID,\n    pc.Name AS CategoryName,\n    DATEFROMPARTS(YEAR(soh.OrderDate), MONTH(soh.OrderDate), 1) AS OrderMonth,\n    SUM(CAST(sod.OrderQty AS INT) * CAST(sod.UnitPrice AS MONEY)) AS TotalSalesAmount,\n    SUM(CAST(sod.OrderQty AS INT)) AS TotalQuantitySold,\n    COUNT(DISTINCT soh.SalesOrderID) AS NumOrders\nFROM SalesLT.SalesOrderDetail sod\nJOIN SalesLT.SalesOrderHeader soh ON sod.SalesOrderID = soh.SalesOrderID\nJOIN SalesLT.Product p ON sod.ProductID = p.ProductID\nJOIN SalesLT.ProductCategory pc ON p.ProductCategoryID = pc.ProductCategoryID\nGROUP BY\n    pc.ProductCategoryID,\n    pc.Name,\n    DATEFROMPARTS(YEAR(soh.OrderDate), MONTH(soh.OrderDate), 1);\n\n\n\n   select * from  MonthlyCategorySales;\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dedicatedsqlpool",
+				"poolName": "dedicatedsqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
