@@ -66,6 +66,85 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Loop_Through_Tables",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.tablelist",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "task_copy1",
+							"description": "sales per product category per month",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "SqlPoolSink",
+									"allowCopyCommand": true,
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": true,
+								"stagingSettings": {
+									"linkedServiceName": {
+										"referenceName": "azurelearn7-WorkspaceDefaultStorage",
+										"type": "LinkedServiceReference"
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "AzureSqlTable1",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table": {
+											"value": "@item().table",
+											"type": "Expression"
+										},
+										"Schema": {
+											"value": "@item().schema",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_synapse",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table": {
+											"value": "@item().table",
+											"type": "Expression"
+										},
+										"Schema": {
+											"value": "@item().schema",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
@@ -74,6 +153,31 @@
 			},
 			"schema": {
 				"type": "string"
+			},
+			"tablelist": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"schema": "SalesLT",
+						"table": "Product"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "ProductCategory"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "SalesOrderHeader"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "SalesOrderDetail"
+					},
+					{
+						"schema": "SalesLT",
+						"table": "Customer"
+					}
+				]
 			}
 		},
 		"annotations": []
