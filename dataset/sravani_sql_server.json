@@ -1,0 +1,12 @@
+{
+	"name": "sravani_sql_server",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sravanisqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
