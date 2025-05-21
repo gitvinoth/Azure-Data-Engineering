@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "task",
 				"description": "sales per product category per month",
 				"type": "Copy",
 				"dependsOn": [],
@@ -17,30 +17,65 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
+						"type": "AzureSqlSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "SqlPoolSink",
-						"allowCopyCommand": true
+						"allowCopyCommand": true,
+						"tableOption": "autoCreate"
 					},
-					"enableStaging": true
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "azurelearn7-WorkspaceDefaultStorage",
+							"type": "LinkedServiceReference"
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_sql_server",
-						"type": "DatasetReference"
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
+							"Schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_synapse",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							},
+							"Schema": {
+								"value": "@pipeline().parameters.schema",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"table": {
+				"type": "string"
+			},
+			"schema": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
