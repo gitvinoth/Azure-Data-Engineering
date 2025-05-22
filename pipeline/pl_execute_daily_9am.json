@@ -41,6 +41,11 @@
 				}
 			}
 		],
+		"variables": {
+			"Array": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "Execute Pipelines"
 		},

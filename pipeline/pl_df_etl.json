@@ -79,10 +79,6 @@
 					},
 					"sink": {
 						"type": "SqlPoolSink",
-						"preCopyScript": {
-							"value": "@concat('DELETE FROM target_table where last_updated_date >=',activity('Lookup1').output)",
-							"type": "Expression"
-						},
 						"allowCopyCommand": true
 					},
 					"enableStaging": false
