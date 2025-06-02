@@ -1,0 +1,6 @@
+{
+	"name": "CopySalesRawToCleaned",
+	"properties": {
+		"annotations": []
+	}
+}
