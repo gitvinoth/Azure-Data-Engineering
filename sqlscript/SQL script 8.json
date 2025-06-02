@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 8",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE TABLE [silver].[sales_cleaned]\n( \n\t[order_id] [int]  NULL,\n\t[order_date] [date]  NULL,\n\t[customer_id] [varchar](20)  NULL,\n\t[customer_name] [varchar](100)  NULL,\n\t[region] [varchar](50)  NULL,\n\t[product_id] [varchar](20)  NULL,\n\t[product_name] [varchar](100)  NULL,\n\t[category] [varchar](50)  NULL,\n\t[quantity] [int]  NULL,\n\t[unit_price] [decimal](10,2)  NULL,\n\t[amount] [decimal](21,2)  NULL,\n\t[payment_type] [varchar](50)  NULL\n)\nWITH\n(\n\tDISTRIBUTION = HASH ( [customer_id] ),\n\tCLUSTERED COLUMNSTORE INDEX\n)\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

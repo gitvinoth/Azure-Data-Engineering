@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 10",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE PROC [dbo].[sp_populate_gold_summary] AS\nBEGIN\n    TRUNCATE TABLE gold.sales_kpi_summary;\n\n    INSERT INTO gold.sales_kpi_summary\n    SELECT\n        DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1),\n        region,\n        COUNT(*) AS total_orders,\n        SUM(amount),\n        AVG(amount)\n    FROM silver.sales_cleaned\n    GROUP BY DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1), region;\nEND;\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
