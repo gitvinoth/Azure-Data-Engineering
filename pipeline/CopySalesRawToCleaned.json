@@ -18,7 +18,10 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings"
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "raw",
+							"wildcardFileName": "*"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
