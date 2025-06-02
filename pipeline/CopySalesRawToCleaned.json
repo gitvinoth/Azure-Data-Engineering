@@ -18,8 +18,7 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true
+							"type": "AzureBlobFSReadSettings"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -28,6 +27,12 @@
 					"sink": {
 						"type": "SqlPoolSink",
 						"writeBehavior": "Upsert",
+						"upsertSettings": {
+							"keys": [
+								"order_id"
+							],
+							"interimSchemaName": ""
+						},
 						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
