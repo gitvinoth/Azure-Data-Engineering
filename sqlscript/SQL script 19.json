@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 19",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE TABLE [gold].[sales_kpi_summary]\n( \n\t[order_month] [date]  NULL,\n\t[region] [varchar](50)  NULL,\n\t[total_orders] [int]  NULL,\n\t[total_sales] [decimal](18,2)  NULL,\n\t[avg_order_value] [decimal](18,2)  NULL\n)\nWITH\n(\n\tDISTRIBUTION = HASH ( [region] ),\n\tCLUSTERED COLUMNSTORE INDEX\n)\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

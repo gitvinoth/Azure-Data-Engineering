@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 20",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE TABLE [bronze].[sales_raw]\n( \n\t[order_id] [nvarchar](max)  NULL,\n\t[order_date] [nvarchar](max)  NULL,\n\t[customer_id] [nvarchar](max)  NULL,\n\t[customer_name] [nvarchar](max)  NULL,\n\t[region] [nvarchar](max)  NULL,\n\t[product_id] [nvarchar](max)  NULL,\n\t[product_name] [nvarchar](max)  NULL,\n\t[category] [nvarchar](max)  NULL,\n\t[quantity] [nvarchar](max)  NULL,\n\t[unit_price] [nvarchar](max)  NULL,\n\t[amount] [nvarchar](max)  NULL,\n\t[payment_type] [nvarchar](max)  NULL\n)\nWITH\n(\n\tDISTRIBUTION = ROUND_ROBIN,\n\tHEAP\n)\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

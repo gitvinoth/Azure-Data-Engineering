@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 21",
+	"properties": {
+		"content": {
+			"query": "SELECT * FROM bronze.sales_raw",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

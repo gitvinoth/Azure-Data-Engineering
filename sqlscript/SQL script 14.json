@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 14",
+	"properties": {
+		"content": {
+			"query": "\n\n    SELECT\n        DATEFROMPARTS(YEAR(s.order_date), MONTH(s.order_date), 1),\n        b.region,\n        COUNT(*) AS total_orders,\n        SUM(s.amount),\n        AVG(s.amount)\n    FROM silver.sales_cleaned s INNER JOIN bronze.sales_raw b ON\n    s.order_id = b.order_id\n    GROUP BY DATEFROMPARTS(YEAR(s.order_date), MONTH(s.order_date), 1), b.region;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
