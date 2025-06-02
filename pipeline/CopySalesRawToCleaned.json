@@ -29,6 +29,7 @@
 					},
 					"sink": {
 						"type": "SqlPoolSink",
+						"preCopyScript": "TRUNCATE TABLE bronze.sales_raw",
 						"allowCopyCommand": true,
 						"tableOption": "autoCreate"
 					},
