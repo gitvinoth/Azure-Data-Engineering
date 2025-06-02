@@ -1,0 +1,17 @@
+{
+	"name": "Copy_cmd_from_adls",
+	"properties": {
+		"content": {
+			"query": "COPY INTO bronze.sales_raw\nFROM 'https://projectsaadls.dfs.core.windows.net/synapsecontainers/raw/extended_sales.csv'\nWITH (\n    FILE_TYPE = 'CSV',\n    FIELDTERMINATOR = ',',\n    ROWTERMINATOR = '0x0A',\n    FIRSTROW = 2,\n    CREDENTIAL = (IDENTITY= 'Managed Identity')\n);",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "test_project",
+				"poolName": "test_project"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
