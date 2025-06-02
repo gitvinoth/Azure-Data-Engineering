@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CopySalesData",
+				"name": "raw_to_bronze",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -200,7 +200,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "CopySalesData",
+						"activity": "raw_to_bronze",
 						"dependencyConditions": [
 							"Succeeded"
 						]
