@@ -23,7 +23,7 @@
 			}
 		},
 		"sqlPool": {
-			"referenceName": "test_project",
+			"referenceName": "sales_db",
 			"type": "SqlPoolReference"
 		}
 	},
