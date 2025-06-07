@@ -1,58 +1,70 @@
 {
-	"name": "ds_csv_raw",
+	"name": "ds_adls_processing",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_adls",
+			"referenceName": "ls_adls_storage",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"folderPath": "raw",
-				"fileSystem": "synapsecontainer"
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "processing",
+				"container": "synapsecontainer"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "",
+			"escapeChar": "\\",
 			"firstRowAsHeader": true,
-			"quoteChar": ""
+			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "order_id",
 				"type": "String"
 			},
 			{
+				"name": "order_date",
 				"type": "String"
 			},
 			{
+				"name": "customer_id",
 				"type": "String"
 			},
 			{
+				"name": "customer_name",
 				"type": "String"
 			},
 			{
+				"name": "region",
 				"type": "String"
 			},
 			{
+				"name": "product_id",
 				"type": "String"
 			},
 			{
+				"name": "product_name",
 				"type": "String"
 			},
 			{
+				"name": "category",
 				"type": "String"
 			},
 			{
+				"name": "quantity",
 				"type": "String"
 			},
 			{
+				"name": "unit_price",
 				"type": "String"
 			},
 			{
+				"name": "amount",
 				"type": "String"
 			},
 			{
+				"name": "payment_type",
 				"type": "String"
 			}
 		]
