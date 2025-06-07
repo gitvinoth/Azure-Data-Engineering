@@ -3,56 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow for ETL",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "Copy data1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "df_ELT_sql_to_synapse",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"dfsink": {
-								"schema": {
-									"value": "@pipeline().parameters.sink_schema",
-									"type": "Expression"
-								},
-								"table": {
-									"value": "@pipeline().parameters.table",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					"staging": {
-						"linkedService": {
-							"referenceName": "test-project-sa-WorkspaceDefaultStorage",
-							"type": "LinkedServiceReference"
-						},
-						"folderPath": "synapsecontainers"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "Copy data1",
 				"type": "Copy",
 				"dependsOn": [
@@ -118,32 +68,6 @@
 				}
 			},
 			{
-				"name": "Web1",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Data flow for ETL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"connectVia": {
-						"referenceName": "AutoResolveIntegrationRuntime",
-						"type": "IntegrationRuntimeReference"
-					}
-				}
-			},
-			{
 				"name": "Web2",
 				"type": "WebActivity",
 				"dependsOn": [
@@ -164,32 +88,6 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
-					"connectVia": {
-						"referenceName": "AutoResolveIntegrationRuntime",
-						"type": "IntegrationRuntimeReference"
-					}
-				}
-			},
-			{
-				"name": "Web3",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Data flow for ETL",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
