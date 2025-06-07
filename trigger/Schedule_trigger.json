@@ -9,15 +9,32 @@
 					"referenceName": "pl_execute_daily_9am",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_execute_sales_dashboard",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Hour",
+				"frequency": "Month",
 				"interval": 1,
 				"startTime": "2025-05-19T15:25:00",
-				"timeZone": "GMT Standard Time"
+				"timeZone": "India Standard Time",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						0
+					],
+					"monthDays": [
+						1
+					]
+				}
 			}
 		}
 	}
