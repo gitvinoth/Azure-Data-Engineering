@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": "raw",
-				"fileSystem": "synapsecontainers"
+				"fileSystem": "synapsecontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "",
