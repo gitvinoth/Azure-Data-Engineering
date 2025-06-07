@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 23",
+	"properties": {
+		"content": {
+			"query": "SET ANSI_NULLS ON\nGO\nSET QUOTED_IDENTIFIER ON\nGO\n\nCREATE PROC [dbo].[sp_clean_sales_data] AS \n\nBEGIN \n\n \n\n    INSERT INTO silver.sales_cleaned \n\n    SELECT \n\n        order_id, \n\n        order_date, \n\n        UPPER(customer_id), \n\n        UPPER(product_id), \n\n        amount, \n\n        CURRENT_TIMESTAMP \n\n    FROM bronze.sales_raw \n\n    WHERE amount > 0; \n\nEND;\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sales_db",
+				"poolName": "sales_db"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

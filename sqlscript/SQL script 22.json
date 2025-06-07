@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 22",
+	"properties": {
+		"content": {
+			"query": "\n    SELECT \n\n        b.order_id, \n\n        b.order_date, \n\n        UPPER(b.customer_id), \n\n        UPPER(b.product_id), \n\n        b.amount, \n\n        CURRENT_TIMESTAMP \n\n    FROM bronze.sales_raw b \n\n    WHERE b.amount > 0\n\n\n--MERGE WHEN MATCHED UPDATE WHEN NOT MATCHED INSERT\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sales_db",
+				"poolName": "sales_db"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
