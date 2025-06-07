@@ -23,7 +23,7 @@
 			}
 		},
 		"sqlPool": {
-			"referenceName": "dedicatedsqlpool",
+			"referenceName": "sales_db",
 			"type": "SqlPoolReference"
 		}
 	},

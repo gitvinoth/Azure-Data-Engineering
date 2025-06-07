@@ -31,18 +31,32 @@
 						"type": "SqlPoolSink",
 						"allowCopyCommand": true
 					},
-					"enableStaging": false
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "azurelearn7-WorkspaceDefaultStorage",
+							"type": "LinkedServiceReference"
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "ds_sql_server",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "bronze",
+							"table": "sales"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_synapse",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Table": "bronze",
+							"Schema": "sales"
+						}
 					}
 				]
 			},
@@ -88,7 +102,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "POST",
-					"url": "{}",
+					"url": "http://ddjnjcnjv.com",
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
