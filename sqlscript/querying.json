@@ -1,0 +1,17 @@
+{
+	"name": "querying",
+	"properties": {
+		"content": {
+			"query": "SELECT * FROM [silver].[sales_cleaned] order by order_id\n\nSELECT * FROM bronze.sales_raw",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "sales_db",
+				"poolName": "sales_db"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
