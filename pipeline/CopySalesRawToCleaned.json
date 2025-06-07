@@ -265,7 +265,7 @@
 					"enableLogging": true,
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
-						"fileListPath": "synapsecontainer/raw",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					}
 				}
