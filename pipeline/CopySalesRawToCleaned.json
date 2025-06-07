@@ -257,9 +257,10 @@
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
-							"referenceName": "azurelearn7-WorkspaceDefaultStorage",
+							"referenceName": "ls_adls",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"path": "synapsecontainer/logging"
 					},
 					"enableLogging": true,
 					"storeSettings": {
@@ -306,7 +307,7 @@
 						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "MergeFiles"
+							"copyBehavior": "PreserveHierarchy"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
@@ -429,9 +430,10 @@
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
-							"referenceName": "azurelearn7-WorkspaceDefaultStorage",
+							"referenceName": "ls_adls",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"path": "synapsecontainer/logging"
 					},
 					"enableLogging": true,
 					"storeSettings": {
