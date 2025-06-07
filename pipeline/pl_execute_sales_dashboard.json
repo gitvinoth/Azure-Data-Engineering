@@ -32,8 +32,8 @@
 				}
 			},
 			{
-				"name": "Execute Sales Pipeline",
-				"type": "ExecutePipeline",
+				"name": "If Files Exists",
+				"type": "IfCondition",
 				"dependsOn": [
 					{
 						"activity": "Get Files if Exists",
@@ -42,16 +42,30 @@
 						]
 					}
 				],
-				"policy": {
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "CopySalesRawToCleaned",
-						"type": "PipelineReference"
+					"expression": {
+						"value": "@activity('Get Files if Exists').output",
+						"type": "Expression"
 					},
-					"waitOnCompletion": true
+					"ifTrueActivities": [
+						{
+							"name": "Execute Sales Pipeline",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "CopySalesRawToCleaned",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
+						}
+					]
 				}
 			}
 		],
