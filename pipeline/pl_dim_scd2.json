@@ -1,0 +1,227 @@
+{
+	"name": "pl_dim_scd2",
+	"properties": {
+		"activities": [
+			{
+				"name": "raw_to_stg",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "raw",
+							"wildcardFileName": "*"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlPoolSink",
+						"preCopyScript": "TRUNCATE TABLE silver.stg_dim_customer",
+						"allowCopyCommand": true,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "order_id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "order_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "order_date",
+									"type": "String"
+								},
+								"sink": {
+									"name": "order_date",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "customer_id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "customer_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "customer_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "customer_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "region",
+									"type": "String"
+								},
+								"sink": {
+									"name": "region",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_id",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "product_name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "product_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "category",
+									"type": "String"
+								},
+								"sink": {
+									"name": "category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "quantity",
+									"type": "String"
+								},
+								"sink": {
+									"name": "quantity",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "unit_price",
+									"type": "String"
+								},
+								"sink": {
+									"name": "unit_price",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "amount",
+									"type": "String"
+								},
+								"sink": {
+									"name": "amount",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "payment_type",
+									"type": "String"
+								},
+								"sink": {
+									"name": "payment_type",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_csv_raw",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_synapse_db",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "silver",
+							"table": {
+								"value": "@pipeline().parameters.table",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "UPSERT_for_SCD2",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "raw_to_stg",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": {
+						"value": "@pipeline().parameters.storedproc",
+						"type": "Expression"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_synapse",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"table": {
+				"type": "string"
+			},
+			"storedproc": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "SalesPipeline"
+		},
+		"annotations": []
+	}
+}
